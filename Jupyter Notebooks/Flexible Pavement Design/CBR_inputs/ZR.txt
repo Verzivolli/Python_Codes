@@ -1,0 +1,5 @@
+Functional Classification	Urban	Rural
+Interstate and other freeways	85 99.9	80 99.9
+Principal aertials	80 99	75 95
+Collectors	80 95	75 95
+Local	50 80	50 80

@@ -1,0 +1,1 @@
+Arcpy is the python built in command controller for ArcMap (Gis). Codes in this section are used in Arcmap for computational/Automation purpose.

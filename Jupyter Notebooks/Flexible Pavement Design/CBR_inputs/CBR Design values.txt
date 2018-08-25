@@ -1,0 +1,5 @@
+initial soil CBR	4
+subGrade target CBR	7
+subBase target CBR	20
+base target CBR	95
+surface CBR (not needed leave it 100)	100

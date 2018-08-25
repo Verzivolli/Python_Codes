@@ -1,0 +1,15 @@
+General Soil Type 	USC Soil Type 	CBR Range
+Coarse-grained soils 	GW 	40 – 80
+Coarse-grained soils 	GP 	30 – 60
+Coarse-grained soils 	GM 	20 – 60
+Coarse-grained soils 	GC 	20 – 40
+Coarse-grained soils 	SW 	20 – 40
+Coarse-grained soils 	SP 	10 – 40
+Coarse-grained soils 	SM 	10 – 40
+Coarse-grained soils 	SC 	5 – 20
+Fine-grained soils 	ML 	15 or less
+Fine-grained soils 	CL LL < 50% 	15 or less
+Fine-grained soils 	OL 	5 or less
+Fine-grained soils 	MH 	10 or less
+Fine-grained soils 	CH LL > 50% 	15 or less
+Fine-grained soils 	OH 	5 or less

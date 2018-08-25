@@ -1,0 +1,4 @@
+Growth rate of cars (percentage)	8
+Growth rate of trucks (percentage)	8
+Lane Distribution (percentage)	100
+Design life (years)	13

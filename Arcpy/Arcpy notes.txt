@@ -1,0 +1,212 @@
+ListLayers
+ListField
+Describe
+
+arcpy.ApplySymbologyFromLayour_management(featre, .lyr file)
+arcpy.env.workspace = "f:..."
+arcpy.Intersect_analysis(
+* stand alone scipt
+create link vectors
+
+
+http://pro.arcgis.com/en/pro-app/tool-reference/data-management/add-field.htm
+
+
+import arcpy
+import os
+filename = "outTable"
+arcpy.env.workspace = r"F:\LOT 1\Ani\00 VauDejes\Faza3t\ArcMap\Sizmik\Temp\GeodataTest.mdb"
+path = os.path.join(arcpy.env.workspace, filename
+arcpy.TabulateIntersection_analysis("Izoseiste01Shqiperia","Id","Izoseiste01",path)
+
+
+get as multivalue
+getPArameterAsText().split(";") // string.split(";")
+# split(delimiter) python delimiter
+
+Enviroment
+
+//============================
+add python code (file) to a new toolbox
+r.click new toolbox
+r.click toolbox add scribd\
+GetParameterAsText will get params in the inputs table
+opens script tool wizard
+
+
+//============================
+#Geoprocessing validation
+# start try block
+try:
+	arcpy.Buffer_analysis("C:/ws/roads.shp", "C:/ws/roads10.shp", 10)
+# If an error occurs running a geoprocessing tool,
+# print tool message
+#ExecuteError will only trigger if a tool fails
+exept arcpy.ExecuteError:
+	print arcpy.GetMessages(2)
+#Any other error
+exept Exception as e:
+	print e.message
+
+
+
+//============================
+def listFieldPror(table, fieldProp):
+	''' Return a list of field properties
+	'''
+	# table can be layerlist
+	# property example: "name"
+
+	propList = []
+
+	for field in arcpy.ListFields(table):
+		propList.append(eval("field." fieldProp))
+
+	return propList
+
+
+//===========================
+#Sample code
+import arcpy
+arcpy.env.workspace = "C:/test"
+for fc in arcpy.ListFeatureClasses():
+	outName = arcpy.CreateScratchName("clipped_" + fc, "", "featureclass", arcpy.env.workspace)
+	arcpy.Clip_analysis(fc, "boundary", outName)
+
+//===========================
+#Sample code
+# get an input feature class
+inFC = arcpy.GetParameterAsText(0)
+#describe
+d = arcpy.Describe(inFC)
+#make decision based on inFC type
+if d.shapeType == "Polygon":
+	arcpy.FeatureToLine_management(inFC, outFC)
+else:
+	arcpy.CopyFeatures_management(inFC, outFC)
+//===========================
+#Sample code
+import arcpy
+for row in arcpy.SearchCursor("F:/data.dgb/roads"):
+	print "Road name: %s" % row.roadname
+	print "Road type: %s" % row.getValue("roadtype")
+del row
+//===========================
+#Sample code
+#open an insert cursor for a line feature class
+cur = arcpy.InsertCursor(fc)
+#Create a new row for the feature Class
+feat = cur.newRow()
+#Create a list of point objects
+ptList = [arcpy.Point(123456, 456789), arcpy.Point(4564654, 7897987)]
+#set the geometry of the new feature to the array of points
+feat.shape = arcpy.Array(ptList)
+#insert the feature
+cur.insertRow(feat)
+#delete objects
+del cur, feat
+//===========================
+#Table to html
+#Table to html
+import sys, string, os, arcpy
+# get parameter as text are for script table popup
+tablePath = arcpy.getParameterAsText(0)
+#
+filepath = arcpy.getParameterAsText(1)
+# open with writte acces
+outfile = open(filePath, "w")
+fileds = arcpy.ListFields(tablePath)
+fieldNames = []
+for field in fields:
+	if (field.type <> "Geometry" and field.type <> "BLOB"):
+		fieldNames.append(field.name)
+outfile.write("<table border=""1"">\n")
+outfile.write("<tr>\n")
+for fieldName in fieldNames:
+	outfile.write("<th>" + fieldName + "</th>\n")
+outfile.write("</tr>\n")
+rows = arcpy.SearchCursor(tablePath)
+for row in rows:
+	outfile.write("<tr>\n")
+	for fieldName in fieldNames:
+		outfile.write("<td>" + str(row.getValue(fieldName)) + "</td>\n")
+	outfile.write("</tr>\n")
+del rows
+outfile.write("</table>\n")
+outfile.flush()
+outfile.close()
+
+//===================
+#improve table to html
+#Table to html
+import sys, string, os, arcpy
+# get parameter as text are for script table popup
+tablePath = arcpy.getParameterAsText(0)
+must set type to field when saving as tool
+# get multivalue
+fieldNames = arcpy.getParameterAsText(1).split(";")
+filepath = arcpy.getParameterAsText(2)
+# open with writte acces
+outfile = open(filePath, "w")
+fileds = arcpy.ListFields(tablePath)
+fieldNames = []
+for field in fields:
+	if (field.type <> "Geometry" and field.type <> "BLOB"):
+		fieldNames.append(field.name)
+outfile.write("<table border=""1"">\n")
+outfile.write("<tr>\n")
+for fieldName in fieldNames:
+	outfile.write("<th>" + fieldName + "</th>\n")
+outfile.write("</tr>\n")
+rows = arcpy.SearchCursor(tablePath)
+for row in rows:
+	outfile.write("<tr>\n")
+	for fieldName in fieldNames:
+		outfile.write("<td>" + str(row.getValue(fieldName)) + "</td>\n")
+	outfile.write("</tr>\n")
+del rows
+outfile.write("</table>\n")
+outfile.flush()
+outfile.close()
+
+
+
+
+
+
+print maxvals
+[[0, 0], [1, 34608.616076267856]]
+>>> for row in arcpy.da.SearchCursor(path, ["id","LENGTH"]):
+...     rowid = int(row[0])
+...     print rowid
+...     rowVal = float(row[1])
+...     found = 0
+...     for data in maxvals:
+...         if data[0] == rowid:
+...             print "FOUND"
+...             found = 1
+...             if rowVal > data[1]:
+...                 data[1] = rowVal
+...     if found == 0:
+...         print "adding row"
+...         maxvals.append([rowid, rowVal])
+...         
+1
+FOUND
+>>> with arcpy.da.SearchCursor(path, ["id","LENGTH"]) as cursor:
+...     for row in cursor:
+...         rowid = int(row[0])
+...         print rowid
+...         rowVal = float(row[1])
+...         found = 0
+...         for data in maxvals:
+...             if data[0] == rowid:
+...                 print "FOUND"
+...                 found = 1
+...                 if rowVal > data[1]:
+...                     data[1] = rowVal
+...         if found == 0:
+...             print "adding row"
+...             maxvals.append([rowid, rowVal])
+
+	

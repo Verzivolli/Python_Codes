@@ -1,0 +1,5 @@
+line1
+line2
+line with spaces
+inline domunent not utf 8 ç ë Ë Ç
+inline special characters ! @ # $ % ^ & * ( ) _ + / * - , . / l ; ' < > ? : | "

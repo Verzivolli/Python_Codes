@@ -1,0 +1,39 @@
+﻿import os
+... import csv
+... import arcpy
+... 
+... def ListMXDSources(path,extension):
+...   list_dir = []
+...   CountList = []
+...   MapList = []
+...   list_dir = os.listdir(path)
+...   precount = 0
+...   count = 0
+...   count2=0
+...   a = 1
+...   for paths, dirctory, files in os.walk(path):
+... #      for file in files:
+...  #         if file.endswith(extension): # eg: '.mxd'
+...   #            precount += 1
+...    #   print str(precount) + ' projekte GIS u gjetën.' + "\n"
+...       print 'Gjenerimi i PDF-ve ka filluar. JU lutem mos e përdorni kompjuterin' + "\n"
+...       for file in files:
+...           if file.endswith(extension): # eg: '.mxd'
+...               mxd = arcpy.mapping.MapDocument(os.path.join(paths, file))
+...               print(file + '    --     Checking')
+...               #count += 1
+...               elm_list= arcpy.mapping.ListLayoutElements(mxd,"TEXT_ELEMENT")
+...               for elm in elm_list:
+...                   if elm.text == 'Mehmet Kruja':
+...                       count += 1
+...                       elm.text = 'Muhamet Kruja'
+...                       print file
+...                   if elm.text == 'z. Gjok Ndoka':
+...                       elm.text = 'z. Kristian Gjidodaj'
+...               del elm_list
+...               pdf_name = file[:-4] + ".pdf"
+...               arcpy.mapping.ExportToPDF(current_mxd, pdf_name)
+...               print (pdf_name + '         U KRY!')
+...               mxd.save()
+... #-------------Vaiablat vendosen tek rreshti mëposhtë----------------#
+... ListMXDSources(path=r"F:\LOT 1\Ani\Projekte201600827\20160905\2016.12.13 PasDorezimitFinal\Lezha\PerVule",extension=".mxd")

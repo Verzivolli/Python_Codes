@@ -1,0 +1,5 @@
+def update(field,new_val):
+	if new_val == None:
+		return field
+	else:
+		return new_val

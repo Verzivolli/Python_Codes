@@ -15,10 +15,10 @@ from keras.datasets import imdb
 import os
 
 # specifying dataset path
-dataset_folder_UTS = r"F:\LOT 1\Ani\Box_Sync\Notes\Deep_learning\datasets"
-dataset_folder = r"D:\BoxPurrelySync\Notes\Deep_learning\datasets"
+cwd = os.getcwd()
+dataset_folder = "datasets"
 dataset_name = "imdb.npz"
-dataset_path = os.path.join(dataset_folder, dataset_name)
+dataset_path = os.path.join(cwd,os.path.join(dataset_folder, dataset_name))
 # dataset_path = os.path.join(dataset_folder, dataset_name)
 
 ### Downloading the dataset

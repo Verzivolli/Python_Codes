@@ -1,0 +1,45 @@
+import os
+import arcpy
+administrative = "all_1"
+bashki_row = "Emri_Bashk"
+# temp query field "Emri_Bashk = 'BELSH'"
+admlyrs = []
+mxd = arcpy.mapping.MapDocument("CURRENT")
+df = arcpy.mapping.ListDataFrames(mxd)[0]
+for lyr in arcpy.mapping.ListLayers(mxd, "",df):
+	if lyr.name == "all_1":
+		res1 = lyr
+	if lyr.name == "all_2":
+		res2 = lyr
+admlyrs.append(res1)
+admlyrs.append(res2)
+
+# targetlayer_1 = arcpy.mapping.ListLayers("Current", administrative, df)[0]
+
+bashkite = [row[0] for row in arcpy.da.SearchCursor(administrative, bashki_row)][20:]
+
+arcpy.env.workspace = r"F:\LOT 1\Ani\Box_Sync\Temp\arsim"
+def GetExtents(fc):
+	for row in arcpy.da.SearchCursor(fc, ["SHAPE@", bashki_row]):
+		extent = row[0].extent
+		#print("Extent of county {0}:".format(row[1]))
+		#print("XMin: {0}, YMin: {1}".format(extent.XMin, extent.YMin))
+		#print("XMax: {0}, YMax: {1}".format(extent.XMax, extent.YMax))
+		return [extent.XMin, extent.YMin, extent.XMax, extent.YMax]
+
+for bashki in bashkite:
+	try:
+		querystring = "Emri_Bashk = " + "'" + bashki + "'"
+		q2 = "NOT " + querystring
+		admlyrs[0].definitionQuery = querystring
+		admlyrs[1].definitionQuery = q2
+		newxt = GetExtents(admlyrs[0])
+		newExtent = df.extent
+		newExtent.XMin, newExtent.YMin = newxt[0], newxt[1]
+		newExtent.XMax, newExtent.YMax = newxt[2], newxt[3]
+		df.extent = newExtent
+		filename = os.path.join(r"F:\LOT 1\Ani\Box_Sync\Temp\arsim", bashki + ".pdf")
+		print(filename)
+		arcpy.mapping.ExportToPDF(mxd, filename)
+	except:
+		print(bashki + 'could not be compleated')

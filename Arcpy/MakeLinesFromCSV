@@ -1,0 +1,27 @@
+def readlines(fname):
+    with open(fname) as f:
+        return f.read().splitlines()
+>>> csv_folder = r"F:\Dropbox\Projekte UTS-01\DLDP - Venddepozitime\Code\Per_DistanceMatrix"
+>>> import os
+>>> csv_coords_file = "forLineCoords.csv"
+>>> lines_array = (os.path.join(csv_folder, csv_coords_file))
+>>> print lines_array
+F:\Dropbox\Projekte UTS-01\DLDP - Venddepozitime\Code\Per_DistanceMatrix\forLineCoords.csv
+>>> lines_array = readlines(os.path.join(csv_folder, csv_coords_file))
+>>> print lines_array
+
+point = arcpy.Point()
+array = arcpy.Array()
+
+featureList = []
+cursor = arcpy.InsertCursor(r"F:\Dropbox\Projekte UTS-01\DLDP - Venddepozitime\TempDataAndWork\From_To_Test.shp")
+feat = cursor.newRow()
+
+for csv_rows in lines_array:
+...     array.add(arcpy.Point(float(csv_rows.split(",")[1]),float(csv_rows.split(",")[2])))
+...     array.add(arcpy.Point(float(csv_rows.split(",")[3]),float(csv_rows.split(",")[4])))
+...     polyline = arcpy.Polyline(array)
+...     array.removeAll()
+...     featureList.append(polyline)
+...     feat.shape = polyline
+...     cursor.insertRow(feat)

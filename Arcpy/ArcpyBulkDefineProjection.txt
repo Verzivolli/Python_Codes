@@ -1,0 +1,5 @@
+mxd = arcpy.mapping.MapDocument("CURRENT")
+dsc = arcpy.Describe("GKB15-31a.jpg")
+sr = dsc.spatialReference
+for lyr in arcpy.mapping.ListLayers(mxd):
+	arcpy.DefineProjection_management(lyr, sr)

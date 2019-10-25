@@ -1,0 +1,14 @@
+import arcpy
+
+# A list of values that will be used to construct new rows
+def read_lines(fname):
+	with open(fname) as f:
+		return f.read().splitlines()
+linescsv = read_lines(r"F:\LOT 1\Ani\Box_Sync\OngoingProjectsAndCodes\test.csv")
+x = 0
+cursor = arcpy.da.InsertCursor("temptest", ("SHAPE@X", "SHAPE@Y"))
+for line in linescsv:
+	if x == 0:
+		x += 1
+	else:
+		cursor.insertRow((float(line.split(",")[1]),float(line.split(",")[0]),int(line.split(",")[2])))

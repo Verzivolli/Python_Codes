@@ -1,0 +1,22 @@
+from __future__ import print_function
+administrative = "KufijAdministrative"
+nameAttribute = "Emri_Qark"
+mxd = arcpy.mapping.MapDocument("CURRENT")
+df = arcpy.mapping.ListDataFrames(mxd)[0]
+print ("{")
+for lyr in arcpy.mapping.ListLayers(mxd, "",df):
+	if lyr.name == administrative:
+		rows = arcpy.SearchCursor(lyr)
+		shapeName = arcpy.Describe(lyr).shapeFieldName
+		emri = ""
+		for row in rows:
+			emri = row.getValue(nameAttribute)
+			feat = row.getValue(shapeName)
+			extent = feat.extent
+			print ("\"",emri,"\":{\"x1\":",extent.XMin,",\"y1\":",extent.YMin,",\"x2\":",extent.XMax,",\"y2\":",extent.YMax,"},\n",end="",sep="")
+print ("}")
+#    print item, in Python 2.7
+#    print(item, end=" ") in Python 3
+#If you want to print the data dynamically use following syntax:
+#
+#    print(item, sep=' ', end='', flush=True
